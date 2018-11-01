@@ -1,0 +1,19 @@
+all: blatt02_nitschke_grisard.pdf
+
+blatt02_nitschke_grisard.pdf: blatt02_nitschke_grisard.ipynb 
+	jupyter nbconvert --to notebook --execute blatt02_nitschke_grisard.ipynb --output blatt02_nitschke_grisard.ipynb
+	ipython nbconvert --to pdf blatt02_nitschke_grisard.ipynb
+	jupyter nbconvert --ClearOutputPreprocessor.enabled=True --inplace blatt02_nitschke_grisard.ipynb
+
+push: blatt02_nitschke_grisard.ipynb
+	jupyter nbconvert --ClearOutputPreprocessor.enabled=True --inplace blatt02_nitschke_grisard.ipynb
+	git add --all
+	git commit 
+	git push 
+
+
+
+clean:
+	rm -rf blatt02_nitschke_grisard.pdf
+
+.PHONY: clean all 
