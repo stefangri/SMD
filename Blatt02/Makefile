@@ -11,6 +11,11 @@ push: blatt02_nitschke_grisard.ipynb
 	git commit 
 	git push 
 
+clearoutput: 
+	jupyter nbconvert --ClearOutputPreprocessor.enabled=True --inplace blatt02_nitschke_grisard.ipynb
+
+
+
 
 
 clean:
