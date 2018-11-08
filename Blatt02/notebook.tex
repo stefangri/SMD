@@ -1,0 +1,1000 @@
+
+% Default to the notebook output style
+
+
+
+
+% Inherit from the specified cell style.
+
+
+
+
+
+\documentclass[11pt]{article}
+
+
+
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics
+                         % to support a larger range
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+
+
+
+
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+
+
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{blatt02\_nitschke\_grisard}
+
+
+
+
+    % Pygments definitions
+
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+
+
+
+    \begin{document}
+
+
+    \maketitle
+
+
+
+
+    \section{Blatt 2}\label{blatt-2}
+
+    \subsection{Aufgabe 5}\label{aufgabe-5}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{numpy} \PY{k}{import} \PY{n}{random}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+
+        \PY{n}{uniform} \PY{o}{=} \PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{n}{size} \PY{o}{=} \PY{l+m+mi}{1000}\PY{p}{)}
+\end{Verbatim}
+
+
+    \textbf{a)} Gleichverteilung auf dem Gebiet \([x_{min}, x_{max}]\):
+\[f(x) = \frac{1}{x_{max} - x_{min}}\] Bilde Verteilungsfunktion
+\(F(x)\): \[
+F(x) = \int_{x_{min}}^{x}f(x') \, dx' = \frac{x - x_{min}}{x_{max} - x_{min}}
+\] Bilde Umkehrfunktion \(F^{-1}(y)\): \[
+F^{-1}(y) = (x_{max} - x_{min}) y + x_{min}.
+\] Implementierung und Darstellung:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k}{def} \PY{n+nf}{uniform\PYZus{}intervall}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{xmin}\PY{p}{,} \PY{n}{xmax}\PY{p}{)}\PY{p}{:}
+            \PY{k}{assert} \PY{n}{xmax} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{xmin}
+            \PY{k}{return} \PY{n}{xmin} \PY{o}{+} \PY{n}{y} \PY{o}{*} \PY{p}{(}\PY{n}{xmax} \PY{o}{\PYZhy{}} \PY{n}{xmin}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{uniform\PYZus{}intervall}\PY{p}{(}\PY{n}{uniform}\PY{p}{,} \PY{l+m+mi}{42}\PY{p}{,} \PY{l+m+mi}{44}\PY{p}{)}\PY{p}{,} \PY{n}{bins} \PY{o}{=} \PY{l+m+mi}{20}\PY{p}{,} \PY{n}{histtype}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{step}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Counts}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_5_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+
+    \textbf{b)} Exponentialgesetz:
+\[f(t) = N e^{-\frac{t}{\tau}} = \frac{1}{\tau}e^{-\frac{t}{\tau}}, \quad t \in [0, \infty)\]
+
+Verteilungsfunkion:
+\[F(t) = \int_{0}^{t} f(t') \, dt' = (1 - e^{-\frac{t}{\tau}}) \]
+
+Umkehrfunktion:
+\[F^{-1}(y) = \tau \, \text{ln}\left(\frac{1}{1 - y}\right) \]
+Implementierung:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{def} \PY{n+nf}{F}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{tau} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{tau} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{/} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{y}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{F}\PY{p}{(}\PY{n}{uniform}\PY{p}{)}\PY{p}{,} \PY{n}{bins} \PY{o}{=} \PY{l+m+mi}{30}\PY{p}{,} \PY{n}{histtype}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{step}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{frac}\PY{l+s+si}{\PYZob{}t\PYZcb{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{tau\PYZcb{}\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Counts}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_8_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+
+    \textbf{c)} Potenzgesetz:
+\[f(x) = N x^{-n} = \frac{1 - n}{x_{max}^{1-n} - x_{min}^{1-n} } x^{-n}, \quad x \in [x_{min}, x_{max}], n \geq 2\]
+Verteilungsfunktion:
+\[F(x) = \int_{x_{min}}^{x} f(x') \, dx' = \frac{x^{1-n} - x_{min}^{1-n}  }{ x_{max}^{1-n} - x_{min}^{1-n} }\]
+
+Umkehrfunktion:
+\[  F^{-1}(y) = \left\{ \left(x_{max}^{1-n} - x_{min}^{1 - n}\right)y + x_{min}^{1-n}  \right\}^{\frac{1}{1 - n}}  \]
+Implementierung:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{def} \PY{n+nf}{power}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{xmin}\PY{p}{,} \PY{n}{xmax}\PY{p}{,} \PY{n}{n}\PY{p}{)}\PY{p}{:}
+            \PY{k}{assert} \PY{n}{n} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{2}
+            \PY{k}{return} \PY{p}{(} \PY{p}{(}\PY{n}{xmax}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{n}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{xmin}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{n}\PY{p}{)}\PY{p}{)} \PY{o}{*} \PY{n}{y} \PY{o}{+}  \PY{n}{xmin}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{n}\PY{p}{)} \PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{1} \PY{o}{/} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{n}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{power}\PY{p}{(}\PY{n}{uniform}\PY{p}{,} \PY{n}{xmin} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{xmax} \PY{o}{=} \PY{l+m+mi}{4}\PY{p}{,} \PY{n}{n} \PY{o}{=} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} \PY{n}{bins} \PY{o}{=} \PY{l+m+mi}{30}\PY{p}{,} \PY{n}{histtype}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{step}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Counts}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+
+    \textbf{d)} Cauchy-Verteilung:
+\[f(x) = \frac{1}{\pi} \frac{1}{1 + x^2}, \quad x \in (-\infty, \infty)\]
+Verteilungsfunktion:
+\[  F(x) = \int_{-\infty}^{x} f(x')\, dx'   = \frac{1}{\pi} \left[\text{arctan}(x) + \frac{\pi}{2} \right]\]
+Umkehrfunktion:
+\[F^{-1}(y) = \text{tan} \left( \pi y - \frac{\pi}{2} \right) \]
+Implementierung:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k}{def} \PY{n+nf}{cauchy}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{tan}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{pi} \PY{o}{*} \PY{p}{(}\PY{n}{y} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{cauchy}\PY{p}{(}\PY{n}{uniform}\PY{p}{)}\PY{p}{,} \PY{n}{bins} \PY{o}{=} \PY{l+m+mi}{500}\PY{p}{,} \PY{n}{histtype}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{step}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{50}\PY{p}{,} \PY{l+m+mi}{50}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Counts}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+
+    \textbf{e)} Verteilung aus empirischem Histogramm mit der 'rejection
+sampling' Methode
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{n}{hist} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{empirisches\PYZus{}histogramm.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{binmids} \PY{o}{=} \PY{n}{hist}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{binmid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{counts} \PY{o}{=} \PY{n}{hist}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{counts}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+
+         \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{errorbar}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{n}{binmids}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{counts}\PY{p}{,} \PY{n}{xerr} \PY{o}{=} \PY{l+m+mf}{0.01}\PY{p}{,} \PY{n}{linestyle} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Counts}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{norm} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{counts} \PY{o}{*} \PY{l+m+mf}{0.2}\PY{p}{)} \PY{c+c1}{\PYZsh{}bin width is 0.2}
+         \PY{n}{norm\PYZus{}counts} \PY{o}{=} \PY{n}{counts} \PY{o}{/} \PY{n}{norm} \PY{c+c1}{\PYZsh{}normalize data}
+         \PY{n}{u1} \PY{o}{=} \PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{n}{size} \PY{o}{=} \PY{l+m+mi}{10000}\PY{p}{)} \PY{c+c1}{\PYZsh{}}
+         \PY{n}{u2} \PY{o}{=} \PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{n}{size} \PY{o}{=} \PY{l+m+mi}{10000}\PY{p}{)} \PY{c+c1}{\PYZsh{}two uniform samples }
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{k}{def} \PY{n+nf}{empirical}\PY{p}{(}\PY{n}{counts}\PY{p}{,} \PY{n}{binmids}\PY{p}{,} \PY{n}{u1}\PY{p}{,} \PY{n}{u2}\PY{p}{)}\PY{p}{:}
+             \PY{n}{binindex} \PY{o}{=} \PY{n}{u1} \PY{o}{/}\PY{o}{/} \PY{l+m+mf}{0.02} \PY{c+c1}{\PYZsh{}get index of bin that includes u1 values }
+             \PY{k}{return} \PY{n}{u1}\PY{p}{[} \PY{p}{[} \PY{n}{u2}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{counts}\PY{p}{[}\PY{n}{binindex}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{]}
+                         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{u1}\PY{p}{)}\PY{p}{)} \PY{p}{]} \PY{p}{]}
+         \PY{n}{y} \PY{o}{=} \PY{n}{empirical}\PY{p}{(}\PY{n}{norm\PYZus{}counts}\PY{p}{,} \PY{n}{binmids}\PY{p}{,} \PY{n}{u1}\PY{p}{,} \PY{n}{u2}\PY{p}{)}
+\end{Verbatim}
+
+
+    Von den erzeugten 20000 Zufallszahlen bleiben 4.905\% übrig.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{counts}\PY{p}{,} \PY{n}{binedges} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{histogram}\PY{p}{(}\PY{n}{y}\PY{p}{,} \PY{n}{bins} \PY{o}{=} \PY{l+m+mi}{50}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{errorbar}\PY{p}{(}\PY{n}{x} \PY{o}{=} \PY{p}{(}\PY{n}{binedges}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{binedges}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{counts}\PY{p}{,} \PY{n}{xerr} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{diff}\PY{p}{(}\PY{n}{binedges}\PY{p}{)} \PY{o}{*} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{linestyle} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Counts}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+
+    \subsection{Aufgabe 6}\label{aufgabe-6}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{k}{def} \PY{n+nf}{linGen}\PY{p}{(}\PY{n}{x\PYZus{}0}\PY{p}{,} \PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{m}\PY{p}{)}\PY{p}{:}
+             \PY{n}{random\PYZus{}numbers} \PY{o}{=} \PY{p}{[}\PY{n}{x\PYZus{}0}\PY{p}{]}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{m}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{next\PYZus{}number} \PY{o}{=} \PY{p}{(}\PY{n}{a} \PY{o}{*} \PY{n}{random\PYZus{}numbers}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+} \PY{n}{b}\PY{p}{)} \PY{o}{\PYZpc{}} \PY{n}{m}
+                 \PY{k}{if} \PY{p}{(}\PY{n}{next\PYZus{}number} \PY{o+ow}{in} \PY{n}{random\PYZus{}numbers}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{return} \PY{n+nb}{len}\PY{p}{(}\PY{n}{random\PYZus{}numbers}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{random\PYZus{}numbers}\PY{p}{)}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n}{random\PYZus{}numbers}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{next\PYZus{}number}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{101}\PY{p}{)}
+         \PY{n}{D} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{(}\PY{n}{linGen}\PY{p}{(}\PY{n}{x\PYZus{}0} \PY{o}{=} \PY{l+m+mi}{4}\PY{p}{,} \PY{n}{a} \PY{o}{=} \PY{n}{n}\PY{p}{,} \PY{n}{b} \PY{o}{=} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{m} \PY{o}{=} \PY{l+m+mi}{1024}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n}{a}\PY{p}{]}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}d = np.array([linGen(n,3,1024,4)[1] for n in a])}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Die maximale Periodenlänge beträgt: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{D}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Für folgende Werte von a ist die Periodenlänge maximal: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{a}\PY{p}{[}\PY{n}{D} \PY{o}{==} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{D}\PY{p}{)}\PY{p}{]} \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Die maximale Periodenlänge beträgt:  1024
+
+Für folgende Werte von a ist die Periodenlänge maximal:
+ [ 1.  5.  9. 13. 17. 21. 25. 29. 33. 37. 41. 45. 49. 53. 57. 61. 65. 69.
+ 73. 77. 81. 85. 89. 93. 97.]
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{a}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{100}\PY{p}{]}\PY{p}{,} \PY{n}{D}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{100}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rx}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Periodenlängen}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Parameter a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Periodenlänge}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper right}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{bbox\PYZus{}to\PYZus{}anchor} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mf}{0.9}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} <matplotlib.legend.Legend at 0x1c5d499ec18>
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+
+    \textbf{b)}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{k}{def} \PY{n+nf}{linGen2}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{m}\PY{p}{,} \PY{n}{x\PYZus{}0}\PY{p}{,} \PY{n}{length}\PY{p}{)}\PY{p}{:}
+             \PY{n}{random\PYZus{}numbers} \PY{o}{=} \PY{p}{[}\PY{n}{x\PYZus{}0}\PY{p}{]}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{length}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{random\PYZus{}numbers}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{p}{(}\PY{n}{a} \PY{o}{*} \PY{n}{random\PYZus{}numbers}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+} \PY{n}{b}\PY{p}{)} \PY{o}{\PYZpc{}} \PY{n}{m}\PY{p}{)}
+             \PY{k}{return} \PY{n}{random\PYZus{}numbers}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{Liste1} \PY{o}{=} \PY{n}{linGen2}\PY{p}{(}\PY{n}{a} \PY{o}{=} \PY{l+m+mi}{1601}\PY{p}{,} \PY{n}{b} \PY{o}{=} \PY{l+m+mi}{3456}\PY{p}{,} \PY{n}{m} \PY{o}{=} \PY{l+m+mi}{10000}\PY{p}{,} \PY{n}{x\PYZus{}0} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,}   \PY{n}{length} \PY{o}{=} \PY{l+m+mi}{10000}\PY{p}{)}
+         \PY{n}{Liste2} \PY{o}{=} \PY{n}{linGen2}\PY{p}{(}\PY{n}{a} \PY{o}{=} \PY{l+m+mi}{1601}\PY{p}{,} \PY{n}{b} \PY{o}{=} \PY{l+m+mi}{3456}\PY{p}{,} \PY{n}{m} \PY{o}{=} \PY{l+m+mi}{10000}\PY{p}{,} \PY{n}{x\PYZus{}0} \PY{o}{=} \PY{l+m+mi}{500}\PY{p}{,} \PY{n}{length} \PY{o}{=} \PY{l+m+mi}{10000}\PY{p}{)}
+         \PY{n}{Liste3} \PY{o}{=} \PY{n}{linGen2}\PY{p}{(}\PY{n}{a} \PY{o}{=} \PY{l+m+mi}{1601}\PY{p}{,} \PY{n}{b} \PY{o}{=} \PY{l+m+mi}{3456}\PY{p}{,} \PY{n}{m} \PY{o}{=} \PY{l+m+mi}{10000}\PY{p}{,} \PY{n}{x\PYZus{}0} \PY{o}{=} \PY{l+m+mi}{750}\PY{p}{,} \PY{n}{length} \PY{o}{=} \PY{l+m+mi}{10000}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+
+         \PY{n}{plt}\PY{o}{.}\PY{n}{rcParams}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure.figsize}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{p}{(}\PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{font.size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+m+mi}{12}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{Liste1}\PY{p}{,} \PY{n}{bins} \PY{o}{=} \PY{l+m+mi}{500}\PY{p}{,} \PY{n+nb}{range} \PY{o}{=} \PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{n}{Liste1}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{Liste1}\PY{p}{)}\PY{p}{]}\PY{p}{,}  \PY{n}{histtype} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{step}\PY{l+s+s1}{\PYZsq{}} \PY{p}{)}\PY{p}{;}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{Liste2}\PY{p}{,} \PY{n}{bins} \PY{o}{=} \PY{l+m+mi}{500}\PY{p}{,} \PY{n+nb}{range} \PY{o}{=} \PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{n}{Liste2}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{Liste2}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{histtype} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{step}\PY{l+s+s1}{\PYZsq{}} \PY{p}{)}\PY{p}{;}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{Liste3}\PY{p}{,} \PY{n}{bins} \PY{o}{=} \PY{l+m+mi}{500}\PY{p}{,} \PY{n+nb}{range} \PY{o}{=} \PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{n}{Liste3}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{Liste3}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{histtype} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{step}\PY{l+s+s1}{\PYZsq{}} \PY{p}{)}\PY{p}{;}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_28_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+
+    Die erhaltenen Zufallszahlen entsprechen nicht den Ansprüchen an einen
+guten Zufallsgenerator, da keine Gleichverteilung der Zahlen vorhanden
+ist. In dem Histogram sieht man jeweils einen Peak bei dem gewählten
+Startwert. Die Güte des Zufallsgenerators hängt jedoch nicht vom
+Startwert ab.
+
+    \textbf{c)}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Liste1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{Liste1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} <matplotlib.collections.PathCollection at 0x1c5d69978d0>
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_31_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{k+kn}{from} \PY{n+nn}{mpl\PYZus{}toolkits} \PY{o}{.}\PY{n}{mplot3d} \PY{k+kn}{import} \PY{n+nn}{Axes3D}
+
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111} \PY{p}{,} \PY{n}{projection} \PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{view\PYZus{}init}\PY{p}{(}\PY{l+m+mi}{45}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}
+         \PY{n}{Liste1}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{Liste1}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{Liste1}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}
+         \PY{n}{lw}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}
+         \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,}
+         \PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+
+    Der Spektraltest zeigt deutlich, dass es sich nicht um einen guten
+Zufallsgenerator handelt, da sowohl in 2D als auch in 3D ein starkes
+Muster zu erkennen ist.
+
+    \textbf{d)}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{Random} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{uniform}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{10000}\PY{p}{,}\PY{l+m+mi}{10000}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{Random}\PY{p}{,} \PY{l+m+mi}{500}\PY{p}{,} \PY{n+nb}{range} \PY{o}{=} \PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{n}{Random}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{Random}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{histtype} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{step}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_35_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Random}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{Random}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{marker} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} <matplotlib.collections.PathCollection at 0x1c5d6b83390>
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111} \PY{p}{,} \PY{n}{projection} \PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{view\PYZus{}init}\PY{p}{(}\PY{l+m+mi}{45}\PY{p}{,} \PY{l+m+mi}{30}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}
+         \PY{n}{Random}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} \PY{n}{Random}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} \PY{n}{Random}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{:}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,}
+         \PY{n}{lw}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}
+         \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,}
+         \PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show} \PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_37_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+
+    \textbf{e)}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{x0} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{201}\PY{p}{)} \PY{c+c1}{\PYZsh{} 0.5 steps}
+         \PY{n}{De} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{n}{linGen}\PY{p}{(}\PY{n}{x\PYZus{}0} \PY{o}{=} \PY{n}{n}\PY{p}{,} \PY{n}{a} \PY{o}{=} \PY{l+m+mi}{5}\PY{p}{,} \PY{n}{b} \PY{o}{=} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{m} \PY{o}{=} \PY{l+m+mi}{1024}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{tolist}\PY{p}{(}\PY{p}{)} \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n}{x0}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{} a = 5 is one of the values with max period }
+         \PY{n}{Liste05} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n}{De}\PY{p}{:}
+             \PY{k}{if} \PY{p}{(}\PY{l+m+mf}{0.5} \PY{o+ow}{in} \PY{n}{n}\PY{p}{)} \PY{o}{==} \PY{k+kc}{True}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{}print(n)}
+                 \PY{n}{Liste05}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{x0}\PY{p}{[}\PY{n}{De}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{n}{n}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{In jeder Liste kommt der Wert 0.5 maximal einmal vor, da bei einer Periodenlänge jeder Wert nur einmal vorkommen kann.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Der Wert 0.5 kann dabei für folgende Startwerte erhalten werden: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{Liste05}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+In jeder Liste kommt der Wert 0.5 maximal einmal vor, da bei einer Periodenlänge jeder Wert nur einmal vorkommen kann.
+
+Der Wert 0.5 kann dabei für folgende Startwerte erhalten werden:  [1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5, 10.5, 11.5, 12.5, 13.5, 14.5, 15.5, 16.5, 17.5, 18.5, 19.5, 20.5, 21.5, 22.5, 23.5, 24.5, 25.5, 26.5, 27.5, 28.5, 29.5, 30.5, 31.5, 32.5, 33.5, 34.5, 35.5, 36.5, 37.5, 38.5, 39.5, 40.5, 41.5, 42.5, 43.5, 44.5, 45.5, 46.5, 47.5, 48.5, 49.5, 50.5, 51.5, 52.5, 53.5, 54.5, 55.5, 56.5, 57.5, 58.5, 59.5, 60.5, 61.5, 62.5, 63.5, 64.5, 65.5, 66.5, 67.5, 68.5, 69.5, 70.5, 71.5, 72.5, 73.5, 74.5, 75.5, 76.5, 77.5, 78.5, 79.5, 80.5, 81.5, 82.5, 83.5, 84.5, 85.5, 86.5, 87.5, 88.5, 89.5, 90.5, 91.5, 92.5, 93.5, 94.5, 95.5, 96.5, 97.5, 98.5, 99.5]
+
+
+    \end{Verbatim}
+
+    \subsection{Aufgabe 7}\label{aufgabe-7}
+
+    \textbf{a)}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{mu\PYZus{}x} \PY{o}{=} \PY{l+m+mi}{4}
+         \PY{n}{mu\PYZus{}y} \PY{o}{=} \PY{l+m+mi}{2}
+         \PY{n}{sigma\PYZus{}x} \PY{o}{=} \PY{l+m+mf}{3.5}
+         \PY{n}{sigma\PYZus{}y} \PY{o}{=} \PY{l+m+mf}{1.5}
+         \PY{n}{Cov} \PY{o}{=} \PY{l+m+mf}{4.2}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{Korr} \PY{o}{=} \PY{n}{Cov} \PY{o}{/} \PY{p}{(}\PY{n}{sigma\PYZus{}x}\PY{o}{*}\PY{n}{sigma\PYZus{}y}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Der Korrelationskoeffizient beträgt:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{Korr}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}} \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Der Korrelationskoeffizient beträgt: 0.8
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{COV} \PY{o}{=} \PY{p}{[}\PY{p}{[}\PY{n}{sigma\PYZus{}x}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{Cov}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{Cov}\PY{p}{,} \PY{n}{sigma\PYZus{}y}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{]}
+         \PY{n}{mean} \PY{o}{=} \PY{p}{[}\PY{n}{mu\PYZus{}x}\PY{p}{,} \PY{n}{mu\PYZus{}y}\PY{p}{]}
+         \PY{n}{gauss\PYZus{}2d} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{multivariate\PYZus{}normal}\PY{p}{(}\PY{n}{mean}\PY{p}{,} \PY{n}{COV}\PY{p}{,} \PY{l+m+mi}{15000}\PY{p}{)}
+\end{Verbatim}
+
+
+    \textbf{b)}
+
+    Verwende die Schreibweise aus Aufgabenteil e) :
+
+    $ f(u\_x, u\_y) =
+\lambda \exp{(-\gamma\left[u_x^2 - 2\rho u_x u_y + u_y^2\right])} $
+
+    \(f(u_x,u_y)\) soll konstant sein, somit muss lediglich der Exponent
+betrachtet werden:
+
+    \(u_x^2 - 2\rho u_x u_y + u_y^2 = -\frac{1}{\gamma}\cdot konst.\)
+
+    Es handelt sich dabei um eine Ellipsengleichung, somit liegen Punkte
+gleicher Wahrscheinlichkeit immer auf einer Ellipse.
+
+    \textbf{c)}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{k}{def} \PY{n+nf}{gauss2d}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{l+m+mi}{1} \PY{o}{/} \PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{pi} \PY{o}{*} \PY{n}{sigma\PYZus{}x} \PY{o}{*} \PY{n}{sigma\PYZus{}y} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{Korr}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1} \PY{o}{/} \PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1} \PY{o}{\PYZhy{}} \PY{n}{Korr}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)} \PY{o}{*}  \PY{p}{(}\PY{p}{(}\PY{p}{(}\PY{n}{x} \PY{o}{\PYZhy{}} \PY{n}{mu\PYZus{}x}\PY{p}{)} \PY{o}{/} \PY{n}{sigma\PYZus{}x}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{\PYZhy{}} \PY{l+m+mi}{2} \PY{o}{*}  \PY{n}{Korr} \PY{o}{*} \PY{p}{(}\PY{p}{(}\PY{n}{x} \PY{o}{\PYZhy{}} \PY{n}{mu\PYZus{}x}\PY{p}{)} \PY{o}{/} \PY{n}{sigma\PYZus{}x}\PY{p}{)} \PY{o}{*} \PY{p}{(}\PY{p}{(}\PY{n}{y} \PY{o}{\PYZhy{}} \PY{n}{mu\PYZus{}y}\PY{p}{)} \PY{o}{/} \PY{n}{sigma\PYZus{}y}\PY{p}{)}\PY{o}{+} \PY{p}{(}\PY{p}{(}\PY{n}{y} \PY{o}{\PYZhy{}} \PY{n}{mu\PYZus{}y}\PY{p}{)}  \PY{o}{/}\PY{n}{sigma\PYZus{}y}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+
+         \PY{n}{TestGaus} \PY{o}{=} \PY{n}{gauss2d}\PY{p}{(}\PY{n}{gauss\PYZus{}2d}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{gauss\PYZus{}2d}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{c+c1}{\PYZsh{} zugehörige Wahrscheinlichkeitswerte}
+         \PY{n}{e} \PY{o}{=} \PY{n}{gauss\PYZus{}2d}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{n}{TestGaus}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)} \PY{o}{==} \PY{n}{np}\PY{o}{.}\PY{n}{round}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{e}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{TestGaus}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{]}
+
+         \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{]}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{gauss\PYZus{}2d}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{gauss\PYZus{}2d}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.1}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RandomGauß}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{e}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{e}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.7}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{frac}\PY{l+s+si}{\PYZob{}1\PYZcb{}}\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{sqrt}\PY{l+s+si}{\PYZob{}e\PYZcb{}}\PY{l+s+s1}{\PYZcb{}\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{errorbar}\PY{p}{(}\PY{n}{mean}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{mean}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{xerr} \PY{o}{=} \PY{p}{(}\PY{n}{sigma\PYZus{}x}\PY{p}{)}\PY{p}{,} \PY{n}{yerr}\PY{o}{=}\PY{p}{(}\PY{n}{sigma\PYZus{}y}\PY{p}{)}\PY{p}{,} \PY{n}{ecolor}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{pm}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{sigma\PYZus{}x, }\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{pm}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{sigma\PYZus{}y\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{mean}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{mean}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{s} \PY{o}{=} \PY{l+m+mi}{40}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}(}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{mu\PYZus{}x|}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{mu\PYZus{}y)\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{25}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{Korr}\PY{o}{*}\PY{n}{sigma\PYZus{}y}\PY{o}{/}\PY{n}{sigma\PYZus{}x}\PY{o}{*}\PY{p}{(}\PY{n}{x}\PY{o}{\PYZhy{}}\PY{n}{mu\PYZus{}x}\PY{p}{)} \PY{o}{+} \PY{n}{mu\PYZus{}y}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{g\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}E(y|x)\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{Eyx} \PY{o}{=} \PY{p}{[}\PY{n}{Korr}\PY{o}{*}\PY{n}{sigma\PYZus{}x}\PY{o}{/}\PY{n}{sigma\PYZus{}y}\PY{o}{*}\PY{p}{(}\PY{n}{n}\PY{o}{\PYZhy{}}\PY{n}{mu\PYZus{}y}\PY{p}{)} \PY{o}{+} \PY{n}{mu\PYZus{}x} \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n}{x}\PY{p}{]}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{Eyx}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+sa}{r}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}E(x|y)\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{12}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylim}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{p}{,}\PY{l+m+mi}{9}\PY{p}{)}
+
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{best}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:} <matplotlib.legend.Legend at 0x1c5d6950b00>
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_52_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+
+    \textbf{d)} Die Matrix \(M\) ist hier die transponierte derjenigen
+Rotationsmatrix, die die Inverse der Kovarianzmatrix \(B\)
+diagonalisiert. \(B\) ist gegeben durch: \[
+B = Cov^{-1} = \frac{1}{\sigma_x^2 \sigma_y^2 - \text{Cov}(x, y) }
+\begin{pmatrix}
+    \sigma_y^2 & -\text{Cov}(x, y) \\
+    -\text{Cov}(x, y) & \sigma_x^2
+\end{pmatrix}.
+\] Das ist die Matrix, die in der quadratischen Form im Exponenten der
+mehrdim. Gaußverteilung steht. Eine Diagonalisierung entkoppelt also das
+Problem. Die Diagonalisierte Matrix hat die Eigenwerte auf der
+Diagonalen stehen. Hierbei handelt es sich um die gesuchten
+\(\frac{1}{{\sigma'}_x^2}\) und \(\frac{1}{{\sigma'}_y^2}\). Die
+Eigenwerte ergeben sich aus \[
+\text{det}\left(B - \frac{1}{{\sigma'}_i^2} \cdot 1  \right) \overset{!}{=} 0
+\] durch unspektakuläre Umformungen zu \[
+\frac{1}{{\sigma'}_{x, y}^2} = \frac{1}{2[\sigma_x^2 \sigma_y^2 - \text{Cov}^2(x, y)]} \left\{\sigma_x^2 + \sigma_y^2 \pm  \left[ \left(\sigma_x^2 - \sigma_y^2\right)^2     + 4 \text{Cov}^2(x, y)\right]^{\frac{1}{2}}\right\}.
+\] Für die hier gegeben Werte kann man das dann ausrechnen:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{k}{def} \PY{n+nf}{newsig}\PY{p}{(}\PY{n}{sigx2}\PY{p}{,} \PY{n}{sigy2}\PY{p}{,} \PY{n}{cov2}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{p}{(}\PY{p}{(}\PY{l+m+mf}{0.5} \PY{o}{/} \PY{p}{(}\PY{n}{sigx2}\PY{o}{*}\PY{n}{sigy2} \PY{o}{\PYZhy{}} \PY{n}{cov2}\PY{p}{)} \PY{o}{*} \PY{p}{(} \PY{n}{sigx2} \PY{o}{+} \PY{n}{sigy2}
+                          \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}
+                              \PY{p}{(}\PY{n}{sigx2} \PY{o}{\PYZhy{}} \PY{n}{sigy2}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+                              \PY{o}{+} \PY{l+m+mi}{4} \PY{o}{*} \PY{n}{cov2}
+                           \PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{,}
+                     \PY{p}{(}\PY{l+m+mf}{0.5} \PY{o}{/} \PY{p}{(}\PY{n}{sigx2}\PY{o}{*}\PY{n}{sigy2} \PY{o}{\PYZhy{}} \PY{n}{cov2}\PY{p}{)} \PY{o}{*} \PY{p}{(} \PY{n}{sigx2} \PY{o}{+} \PY{n}{sigy2}
+                          \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}
+                              \PY{p}{(}\PY{n}{sigx2} \PY{o}{\PYZhy{}} \PY{n}{sigy2}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}
+                              \PY{o}{+} \PY{l+m+mi}{4} \PY{o}{*} \PY{n}{cov2}
+                           \PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{mu\PYZus{}x} \PY{o}{=} \PY{l+m+mi}{4}
+         \PY{n}{mu\PYZus{}y} \PY{o}{=} \PY{l+m+mi}{2}
+         \PY{n}{sigx} \PY{o}{=} \PY{l+m+mf}{3.5}
+         \PY{n}{sigy} \PY{o}{=} \PY{l+m+mf}{1.5}
+         \PY{n}{cov} \PY{o}{=} \PY{l+m+mf}{4.2}
+
+
+
+         \PY{n}{gauss\PYZus{}2d} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{multivariate\PYZus{}normal}\PY{p}{(}\PY{p}{[}\PY{n}{mu\PYZus{}x}\PY{p}{,} \PY{n}{mu\PYZus{}y}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{p}{[}\PY{n}{sigx}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{cov}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{n}{cov}\PY{p}{,} \PY{n}{sigy}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{10000}\PY{p}{)}
+
+         \PY{n}{newsigma} \PY{o}{=} \PY{n}{newsig}\PY{p}{(}\PY{n}{sigx}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{sigy}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{cov}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sig\PYZus{}y, six\PYZus{}x = }\PY{l+s+si}{\PYZob{}newsigma\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+sig\_y, six\_x = (0.8485687438706406, 3.712132956525911)
+
+    \end{Verbatim}
+
+    Nun soll die Rotaionsmatrix \(M\) bestimmt werden. Eine Rotationsmatrix
+in 2D ist allgemein gegeben durch \[
+R = \begin{pmatrix}
+cos(\alpha) & -sin(\alpha) \\
+sin(\alpha) & cos(\alpha)
+\end{pmatrix}.
+\] Die Transformation von Matrizen und Vektoren sähe dann so aus \[
+S' = R^{T} S R, \quad \vec{x}' = R^{T} \vec{x}.
+\] Die Matrix \(M\) ist in der Aufgabenstellung andersrum gewählt,
+sodass angesetzt werden kann \[
+M = \begin{pmatrix}
+cos(\alpha) & sin(\alpha) \\
+-sin(\alpha) & cos(\alpha)
+\end{pmatrix}.
+\] Von \(M\) kann man jetzt fordern, dass sie \(B\) diagonalisiert \[
+\begin{pmatrix}
+\frac{1}{{\sigma'}_y^2} & 0 \\
+0 & \frac{1}{{\sigma'}_x^2}
+\end{pmatrix}
+\overset{!}{=}
+M B M^{T}.
+\] Das gibt eins nices überbestimmtes Gleichungssystem für den Winkel
+\(\alpha\). Rechnen nur mit dem Eintrag unten links. Das ergibt die
+Gleichung \[
+0 \overset{!}{=}  \sigma_y^2 sin(\alpha)cos(\alpha) + \text{Cov}(x, y)(cos^2(\alpha) - sin^2(\alpha)) - \sigma_x^2 sin(\alpha) cos(\alpha)
+\] Da kann man jetzt krasse Trigonometrie Skills rein stecken und erhält
+\[
+ 0 = - \frac{1}{2}sin(2\alpha) (\sigma_x^2 - \sigma_y^2) - \text{Cov}(x, y)cos(2\alpha).
+\] Daraus dann \[
+\alpha = \frac{1}{2} \text{arctan} \left(-\frac{2\text{Cov}(x, y)}{\sigma_x^2 - \sigma_y^2}\right).
+\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{k}{def} \PY{n+nf}{alpha}\PY{p}{(}\PY{n}{cov}\PY{p}{,} \PY{n}{sigx2}\PY{p}{,} \PY{n}{sigy2}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{arctan}\PY{p}{(}\PY{o}{\PYZhy{}} \PY{l+m+mi}{2} \PY{o}{*} \PY{n}{cov} \PY{o}{/} \PY{p}{(}\PY{n}{sigx2} \PY{o}{\PYZhy{}} \PY{n}{sigy2}\PY{p}{)} \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{alpha ist ca. }\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{alpha(cov, sigx**2, sigy**2) * 180 / np.pi:.3f\PYZcb{} Grad}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+alpha ist ca. -20.015 Grad
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{k}{def} \PY{n+nf}{rotate}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{alpha}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}function that rotates a given vector x by an angle alpha. }
+             \PY{n}{matrix} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{alpha}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{alpha}\PY{p}{)}\PY{p}{]}\PY{p}{,}
+                                \PY{p}{[}\PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{sin}\PY{p}{(}\PY{n}{alpha}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{cos}\PY{p}{(}\PY{n}{alpha}\PY{p}{)}\PY{p}{]}\PY{p}{]} \PY{p}{)}
+             \PY{k}{return} \PY{n}{matrix}\PY{o}{.}\PY{n}{dot}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+
+         \PY{n}{old\PYZus{}x\PYZus{}axis} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+         \PY{n}{old\PYZus{}y\PYZus{}axis} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+
+         \PY{n}{new\PYZus{}x\PYZus{}axis} \PY{o}{=} \PY{n}{rotate}\PY{p}{(}\PY{n}{old\PYZus{}x\PYZus{}axis}\PY{p}{,} \PY{n}{alpha}\PY{p}{(}\PY{n}{cov}\PY{p}{,} \PY{n}{sigx}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{sigy}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+         \PY{n}{new\PYZus{}y\PYZus{}axis} \PY{o}{=} \PY{n}{rotate}\PY{p}{(}\PY{n}{old\PYZus{}y\PYZus{}axis}\PY{p}{,} \PY{n}{alpha}\PY{p}{(}\PY{n}{cov}\PY{p}{,} \PY{n}{sigx}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{sigy}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+
+         \PY{k}{def} \PY{n+nf}{linear\PYZus{}function\PYZus{}from\PYZus{}vector}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{vec}\PY{p}{,} \PY{n}{center}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} linear funtion along a vector x}
+             \PY{k}{return} \PY{n}{vec}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{/} \PY{n}{vec}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{*} \PY{p}{(}\PY{n}{x} \PY{o}{\PYZhy{}} \PY{n}{center}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{n}{center}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}aspect}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{equal}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+
+         \PY{n}{ax}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{gauss\PYZus{}2d}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{gauss\PYZus{}2d}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.3}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+
+         \PY{n}{xlim} \PY{o}{=} \PY{n}{ax}\PY{o}{.}\PY{n}{get\PYZus{}xlim}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ylim} \PY{o}{=} \PY{n}{ax}\PY{o}{.}\PY{n}{get\PYZus{}ylim}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{n}{xlim}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{n}{ylim}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}plt.axes(\PYZsq{}equal\PYZsq{})}
+         \PY{n}{xplot} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{n}{xlim}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{xlim}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1000}\PY{p}{)}
+
+         \PY{n}{new\PYZus{}y\PYZus{}axis\PYZus{}values} \PY{o}{=} \PY{n}{linear\PYZus{}function\PYZus{}from\PYZus{}vector}\PY{p}{(}\PY{n}{xplot}\PY{p}{,} \PY{n}{new\PYZus{}y\PYZus{}axis}\PY{p}{,} \PY{p}{(}\PY{n}{mu\PYZus{}x}\PY{p}{,} \PY{n}{mu\PYZus{}y}\PY{p}{)}\PY{p}{)}
+         \PY{n}{new\PYZus{}x\PYZus{}axis\PYZus{}values} \PY{o}{=} \PY{n}{linear\PYZus{}function\PYZus{}from\PYZus{}vector}\PY{p}{(}\PY{n}{xplot}\PY{p}{,} \PY{n}{new\PYZus{}x\PYZus{}axis}\PY{p}{,} \PY{p}{(}\PY{n}{mu\PYZus{}x}\PY{p}{,} \PY{n}{mu\PYZus{}y}\PY{p}{)}\PY{p}{)}
+
+         \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{xplot}\PY{p}{,}
+                 \PY{n}{linear\PYZus{}function\PYZus{}from\PYZus{}vector}\PY{p}{(}\PY{n}{xplot}\PY{p}{,} \PY{n}{new\PYZus{}x\PYZus{}axis}\PY{p}{,} \PY{p}{(}\PY{n}{mu\PYZus{}x}\PY{p}{,} \PY{n}{mu\PYZus{}y}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+                 \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{n}{linestyle} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Hauptachsen}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{xplot}\PY{p}{,}
+                 \PY{n}{linear\PYZus{}function\PYZus{}from\PYZus{}vector}\PY{p}{(}\PY{n}{xplot}\PY{p}{,} \PY{n}{new\PYZus{}y\PYZus{}axis}\PY{p}{,} \PY{p}{(}\PY{n}{mu\PYZus{}x}\PY{p}{,} \PY{n}{mu\PYZus{}y}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+                 \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                 \PY{n}{linestyle} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+
+         \PY{n}{y} \PY{o}{=} \PY{n}{linear\PYZus{}function\PYZus{}from\PYZus{}vector}\PY{p}{(}\PY{n}{xplot}\PY{p}{,} \PY{n}{new\PYZus{}x\PYZus{}axis}\PY{p}{,} \PY{p}{(}\PY{n}{mu\PYZus{}x}\PY{p}{,} \PY{n}{mu\PYZus{}y}\PY{p}{)}\PY{p}{)}
+         \PY{n}{mask} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{p}{(}\PY{n}{xplot} \PY{o}{\PYZhy{}} \PY{n}{mu\PYZus{}x}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{p}{(}\PY{n}{y} \PY{o}{\PYZhy{}} \PY{n}{mu\PYZus{}y}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{newsigma}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{xplot}\PY{p}{[}\PY{n}{mask}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{p}{[}\PY{n}{mask}\PY{p}{]}\PY{p}{,} \PY{n}{linewidth} \PY{o}{=} \PY{l+m+mi}{5}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZbs{}}\PY{l+s+s1}{sigma}\PY{l+s+se}{\PYZbs{}\PYZsq{}}\PY{l+s+s1}{\PYZdl{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+
+         \PY{n}{y} \PY{o}{=} \PY{n}{linear\PYZus{}function\PYZus{}from\PYZus{}vector}\PY{p}{(}\PY{n}{xplot}\PY{p}{,} \PY{n}{new\PYZus{}y\PYZus{}axis}\PY{p}{,} \PY{p}{(}\PY{n}{mu\PYZus{}x}\PY{p}{,} \PY{n}{mu\PYZus{}y}\PY{p}{)}\PY{p}{)}
+         \PY{n}{mask} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{p}{(}\PY{n}{xplot} \PY{o}{\PYZhy{}} \PY{n}{mu\PYZus{}x}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{+} \PY{p}{(}\PY{n}{y} \PY{o}{\PYZhy{}} \PY{n}{mu\PYZus{}y}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{newsigma}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{xplot}\PY{p}{[}\PY{n}{mask}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{p}{[}\PY{n}{mask}\PY{p}{]}\PY{p}{,} \PY{n}{linewidth} \PY{o}{=} \PY{l+m+mi}{5}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+
+         \PY{n}{ax}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_60_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+
+    \textbf{e)}
+
+    $ f(y,\textbar{},x) = \frac{f(x,y)}{g(x)} ; mit ; g(x) =
+\int\_\{-\infty\}\^{}\{\infty\} f(x,y) \mathrm{dy} \textbackslash{}
+f(x,y) = \frac{1}{2\pi\sigma_y\sigma_x\sqrt{1-\rho^2}}
+\exp{\left(-\frac{1}{2(1-\rho^2)} \left[\left(\frac{x-\mu_x}{\sigma_x}\right)^2 -2\rho\left(\frac{x-\mu_x}{\sigma_x}\right)\left(\frac{y-\mu_y}{\sigma_y}\right) +
+\left(\frac{y-\mu_y}{\sigma_y}\right)^2\right]\right)} $
+
+    \$\mathrm{nutze} ; u\_i = \left( \frac{i-\mu_i}{\sigma_i} \right) ,
+\lambda = \frac{1}{2\pi\sigma_y\sigma_x\sqrt{1-\rho^2}} ; \mathrm{und} ;
+\gamma = \frac{1}{2(1-\rho^2)} : \textbackslash{} f(u\_x, u\_y) =
+\lambda \exp{(-\gamma\left[u_x^2 - 2\rho u_x u_y + u_y^2\right])} \$
+
+    \$ g(x) \$ \$= \lambda \sigma\emph{y \exp{(-\gamma u_x^2)}
+\int}\{-\infty\}\^{}\{\infty\}
+\exp{(-\gamma([u_y - \rho u_x]^2 -\rho^2u_x^2))} , \mathrm{d u_y}
+\textbackslash{} = \lambda \sigma\emph{y \exp{(-\gamma u_x^2)}
+\exp{(\gamma \rho^2 u_x^2)} \int}\{-\infty\}\^{}\{\infty\}
+\exp{(-\gamma[u_y-\rho u_x]^2)} , \mathrm{du_y} \textbackslash{} =
+\frac{\lambda}{\sqrt{\gamma}} \sigma\emph{y
+\exp{(-u_x^2[\gamma-\gamma\rho^2])} \int}\{-\infty\}\^{}\{\infty\}
+\exp{(-\theta^2)} ,\mathrm{d\theta} \textbackslash{} =
+\frac{\lambda}{\sqrt{\gamma}} \sigma\_y
+\exp{(-u_x^2[\gamma-\gamma\rho^2])} \sqrt{\pi} \$
+
+    \$ f(y,\textbar{},x) =
+\frac{\sqrt{\gamma}}{\sigma_y \sqrt{\pi}}\exp{(-\gamma[u_y^2-2\rho u_xu_y + \rho^2u_x^2])}\$
+
+    Analog ergeben sich auch \(h(y)\) und \(f(x\,|\,y)\)
+
+    \$ h(y) = \frac{\lambda}{\sqrt{\gamma}} \sigma\_x
+\exp{(-u_y^2[\gamma-\gamma\rho^2])} \sqrt{\pi} \textbackslash{}
+f(x,\textbar{},y) =
+\frac{\sqrt{\gamma}}{\sigma_x \sqrt{\pi}}\exp{(-\gamma[u_x^2-2\rho u_xu_y + \rho^2u_y^2])}\$
+
+    \textbf{f)}
+
+    \$\mathrm{E}(x,\textbar{}y,) \$\$= \int\_\{-\infty\}\^{}\{\infty\} x ,
+f(x,\textbar{},y) , \mathrm{dx} \$
+
+    \$ u\_x = \frac{x-\mu_x}{\sigma_x} \Leftrightarrow x = u\_x\sigma\_x +
+\mu\_x \$
+
+    \$ \mathrm{E}(x,\textbar{},y) =
+\int\_\{-\infty\}\^{}\{\infty\}(u\_x\sigma\_x +
+\mu\emph{x)\frac{\sqrt{\gamma}}{\sigma_x\sqrt{\pi}}
+\exp{(-\gamma[u_x-\rho u_y]^2)} \sigma\emph{x , \mathrm{du_x}
+\textbackslash{} = \int}\{-\infty\}\^{}\{\infty\}
+u\_x\sigma\emph{x\sqrt{\frac{\gamma}{\pi}}\exp{(-\gamma[u_x-\rho u_y]^2)},\mathrm{du_x}
++
+\int}\{-\infty\}\textsuperscript{\{\infty\}\mu\emph{x\sqrt{\frac{\gamma}{\pi}}\exp{(-\gamma[u_x-\rho u_y]^2)},\mathrm{du_x}
+\textbackslash{} \mathrm{substituiere} ; \sqrt{\gamma}(u\_x-\rho u\_y) =
+z \textbackslash{} =
+\frac{\sigma_x\sqrt{\gamma}}{\sqrt{\pi}}\int}\{-\infty\}}\{\infty\}(\frac{1}{\sqrt{\gamma}}z+\rho u\_y)\exp{(-z^2)}\frac{1}{\sqrt{\gamma}}\mathrm{dz}
++ \frac{\mu_x}{\sqrt{\pi}}\int}\{-\infty\}\^{}\{\infty\}
+\exp{(-z^2)}\mathrm{dz} \textbackslash{} = \sigma\_x\rho u\_y + \mu\_x =
+\rho \frac{\sigma_x}{\sigma_y}(y-\mu\_y) + \mu\_x\$$
+
+    Analog wieder für \(\mathrm{E}(y\,|\,x)\)
+
+  $  \$\mathrm{E}(y,\textbar{},x) =
+\rho \frac{\sigma_y}{\sigma_x}(x-\mu\_x)+\mu\_y \$$
+
+    Beide Geraden sind in Aufgabenteil c) bereits eingezeichnet
+
+
+    % Add a bibliography block to the postdoc
+
+
+
+    \end{document}
