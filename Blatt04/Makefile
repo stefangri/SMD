@@ -12,6 +12,7 @@ commit: blatt04_nitschke_grisard.ipynb
 
 clearoutput:
 	jupyter nbconvert --ClearOutputPreprocessor.enabled=True --inplace blatt04_nitschke_grisard.ipynb
+	rm sample.hdf5
 
 
 
