@@ -1,20 +1,17 @@
-all: blatt10_nitschke_grisard.pdf
+all: blatt_10_nitschke_grisard.pdf
 
-blatt10_nitschke_grisard.pdf: notebook_10.pdf
-	pdfunite notebook_10.pdf scans/aufgabe_26.pdf scans/aufgabe_27.pdf blatt10_nitschke_grisard.pdf
+blatt_10_nitschke_grisard.pdf: blatt_10_nitschke_grisard.ipynb
+	jupyter nbconvert --to notebook --execute blatt_10_nitschke_grisard.ipynb --ExecutePreprocessor.timeout=1000 --output blatt_10_nitschke_grisard.ipynb
+	jupyter nbconvert --to pdf blatt_10_nitschke_grisard.ipynb
+	jupyter nbconvert --ClearOutputPreprocessor.enabled=True --inplace blatt_10_nitschke_grisard.ipynb
 
-notebook_10.pdf: notebook_10.ipynb
-	jupyter nbconvert --to notebook --execute notebook_10.ipynb --output notebook_10.ipynb
-	jupyter nbconvert --to pdf notebook_10.ipynb
-	jupyter nbconvert --ClearOutputPreprocessor.enabled=True --inplace notebook_10.ipynb
-
-commit: notebook_10.ipynb
-	jupyter nbconvert --ClearOutputPreprocessor.enabled=True --inplace notebook_10.ipynb
+commit: blatt_10_nitschke_grisard.ipynb
+	jupyter nbconvert --ClearOutputPreprocessor.enabled=True --inplace blatt_10_nitschke_grisard.ipynb
 	git add --all
 	git commit
 
 clearoutput:
-	jupyter nbconvert --ClearOutputPreprocessor.enabled=True --inplace notebook_10.ipynb
+	jupyter nbconvert --ClearOutputPreprocessor.enabled=True --inplace blatt_10_nitschke_grisard.ipynb
 
 
 
